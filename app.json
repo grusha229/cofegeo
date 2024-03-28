@@ -37,7 +37,7 @@
       ],
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "website.favs.app",
       "googleServicesFile": "./ios/FavsbestplacesinEurope/GoogleService-Info.plist",
       "infoPlist": {
