@@ -44,14 +44,27 @@ const MapBlock: React.FC<Props> = (props) => {
   const currentCategory = useSelector((state: IStateInterface) => state.places.currentCategory);
 
   useEffect(() => {
-    setRegion((prev) => ({
-      ...prev,
-      latitude: currentCity?.center?.latitude || 0,
-      longitude: currentCity?.center?.longitude || 0,
-    }));
+
+    if (type === 'detailed') {
+      setRegion((prev) => ({
+        ...prev,
+        latitude: props?.initialPosition?.latitude || 0,
+        longitude: props?.initialPosition?.longitude || 0,
+      }));
+
+      console.log('coords: ',props?.initialPosition?.latitude, props?.initialPosition?.longitude)
+    }
 
     if (type === 'general' && currentCity?.name && currentCategory?.name && currentFilter) {
+
       setLoading(true);
+
+      setRegion((prev) => ({
+        ...prev,
+        latitude: currentCity?.center?.latitude || 0,
+        longitude: currentCity?.center?.longitude || 0,
+      }));
+
       MapService.getPlacesByCity(currentCity.name, currentCategory, currentFilter === 'all' ? null : currentFilter)
         .then((res) => res.data)
         .then((data) => {
@@ -74,7 +87,7 @@ const MapBlock: React.FC<Props> = (props) => {
       //@ts-ignore
       navigation.navigate('places/[id]', { id: placeId });
     }
-  }, [dispatch, navigation]);
+  }, [dispatch, navigation, props?.initialPosition]);
 
   return (
     <View style={styles.mapContainer}>

@@ -15,6 +15,7 @@ import BannerSlider from "../../../src/components/Banner/BannerSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { resetAuthentication } from "../../../src/store/features/isAuthSlice";
 import { IStateInterface } from "../../../src/store/store";
+import { useRouter } from "expo-router";
 
 const profileDefaultAvatar = require("./../../../assets/icons/user.png");
 
@@ -26,6 +27,7 @@ export default function ProfilePage() {
   const { isLogined, authData } = useSelector((state: IStateInterface) => state.authentication);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const profileAvatar = authData?.photoURL ? { uri: authData?.photoURL } : profileDefaultAvatar;
 
@@ -34,6 +36,9 @@ export default function ProfilePage() {
       .then(() => {
         console.info('logout')
         dispatch(resetAuthentication())
+      })
+      .then(() => {
+        router.push('loading');
       })
       .catch((e) => (console.info('logout error: ', e)))
   }

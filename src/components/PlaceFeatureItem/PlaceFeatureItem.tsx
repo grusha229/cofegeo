@@ -52,11 +52,11 @@ function PlaceFeatureInfo(props: TProps) {
 
 export default function PlaceFeatureItem(props: TProps) {
     const handleClick = useCallback(() => {
-        Linking.openURL(props.link);
+        Linking.openURL(props?.link);
     }, []);
 
     return (
-        <Card onPress={props.link && handleClick} style={styles.card}>
+        <Card onPress={props?.link && handleClick} style={styles.card}>
             <View style={styles.block}>
                 <PlaceFeatureInfo imageSource={props.imageSource} content={props.content} />
             </View>

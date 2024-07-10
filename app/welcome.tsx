@@ -31,11 +31,11 @@ export default function WelcomePage() {
         })
     };
 
-    useEffect(() => {
-        if (authData) {
-            router.replace('(app)');
-        }
-    }, [authData])
+    // useEffect(() => {
+    //     if (authData) {
+    //         router.replace('(app)');
+    //     }
+    // }, [authData])
 
     useEffect(() => {
         configureGoogleSignIn()
@@ -50,6 +50,7 @@ export default function WelcomePage() {
         signInWithCredential(auth ,googleCredential)
             .then((user) => {
                 console.log('signed in:', user);
+                router.replace('(app)');
             })
             .catch((error) => {
                 console.log('error:',error)

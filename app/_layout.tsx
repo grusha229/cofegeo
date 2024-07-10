@@ -36,11 +36,21 @@ export default function RootLayout({ children }) {
         <Provider store={store}>
             <GestureHandlerRootView >
                 <BottomSheetModalProvider>
-                    <Stack screenOptions={{ 
-                        headerShown: false,
-                        headerBackButtonMenuEnabled: true,
-                        headerTransparent: true,
-                    }}>
+                    <Stack 
+                        screenOptions={{ 
+                            headerShown: false,
+                            headerBackButtonMenuEnabled: true,
+                            headerTransparent: true,
+                        }}
+                        initialRouteName='loading'
+                    >
+                        <Stack.Screen
+                            name="loading"
+                            options={{
+                                headerShown: false,
+                                headerTitle: ''
+                            }}
+                        />
                         <Stack.Screen
                             name="welcome"
                             options={{

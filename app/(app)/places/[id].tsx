@@ -88,6 +88,8 @@ export default function PlacePage() {
     }
   },[CurrentPlaceInfo])
 
+  console.log(CurrentPlaceInfo?.coordinates)
+
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -138,8 +140,8 @@ export default function PlacePage() {
                     />
                 }
                 {
-                  (CurrentPlaceInfo?.googleMapsInfo.photoRef?.length > 0 && !isLoading ) &&
-                  CurrentPlaceInfo?.googleMapsInfo.photoRef?.map((item) => (
+                  (CurrentPlaceInfo?.googleMapsInfo?.photoRef?.length > 0 && !isLoading ) &&
+                  CurrentPlaceInfo?.googleMapsInfo?.photoRef?.map((item) => (
                       <View
                         style={{
                           width: "100%",
@@ -210,13 +212,15 @@ export default function PlacePage() {
                     gap: 8,
                   }}
                 >
-                  <Text style={globalStyles.subtitle}>Address</Text>
                   {
-                    (CurrentPlaceInfo?.googleMapsInfo?.locationURL && CurrentPlaceInfo?.googleMapsInfo?.formattedAddress) &&
-                    <AddressBlock 
-                      address={CurrentPlaceInfo?.googleMapsInfo?.formattedAddress}
-                      link={CurrentPlaceInfo?.googleMapsInfo?.locationURL}
-                    />
+                    (CurrentPlaceInfo?.address) &&
+                    <>
+                      <Text style={globalStyles.subtitle}>Address</Text>
+                      <AddressBlock 
+                        address={CurrentPlaceInfo?.address}
+                        link={CurrentPlaceInfo?.googleMapsInfo?.locationURL}
+                      />
+                    </>
                   }
                   {
                     CurrentPlaceInfo?.googleMapsInfo?.openingInfo && 
@@ -252,14 +256,6 @@ export default function PlacePage() {
                   type={"detailed"}
                 />
               </View>
-              {/* <View style={{ marginTop: 0 }}>
-                <Pressable
-                  style={styles.button}
-                  onPress={handlePresentModalPress}
-                >
-                  <Text style={styles.button__text}>Check in</Text>
-                </Pressable>
-              </View> */}
             </View>
           </Animated.ScrollView>
         </View>
